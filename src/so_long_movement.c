@@ -10,7 +10,7 @@ void	move_up(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, x * 32, (y - 1) * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		ft_printf("YOU WON!!\n");
 		close_window(env);
 	}
@@ -23,7 +23,7 @@ void	move_up(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, x * 32, (y - 1) * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		env->map->player_y -= 1;
 		ft_printf("Moves Count: %d\r", env->player->moves++);
 	}
@@ -39,7 +39,7 @@ void	move_down(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, x * 32, (y + 1) * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		ft_printf("YOU WON!!\n");
 		close_window(env);
 	}
@@ -52,7 +52,7 @@ void	move_down(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, x * 32, (y + 1) * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		env->map->player_y += 1;
 		ft_printf("Moves Count: %d\r", env->player->moves++);
 	}
@@ -68,7 +68,7 @@ void	move_right(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, (x + 1) * 32, y * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		ft_printf("\nYOU WON!!\n");
 		close_window(env);
 	}
@@ -81,7 +81,7 @@ void	move_right(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, (x + 1) * 32, y * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		env->map->player_x += 1;
 		ft_printf("Moves Count: %d\r", env->player->moves++);
 	}
@@ -97,7 +97,7 @@ void	move_left(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, (x - 1) * 32, y * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		ft_printf("\nYOU WON!!\n");
 		close_window(env);
 	}
@@ -110,7 +110,7 @@ void	move_left(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, (x - 1) * 32, y * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		env->map->player_x -= 1;
 		ft_printf("Moves Count: %d\r", env->player->moves++);
 	}

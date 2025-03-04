@@ -12,6 +12,8 @@ typedef struct s_map
 	char		**map;
 	int			player_x;
 	int			player_y;
+	int			*height;
+	int			*width;
 	void		*tile;
 	int			cheese_count;
 	int			door_count;

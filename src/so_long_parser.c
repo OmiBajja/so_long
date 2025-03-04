@@ -9,13 +9,13 @@ int	map_init(t_env **env)
 	x = 0;
 	if (!env || !*env)
 		return (0);
-	(*env)->init->img_wall = mlx_xpm_file_to_image((*env)->init->mlx,
-			"small.xpm", &x, &y);
-	if (!(*env)->init->img_wall)
-		return (0);
 	(*env)->init->img_grass = mlx_xpm_file_to_image((*env)->init->mlx,
-			"small_wall.xpm", &x, &y);
+			"small_grass.xpm", &x, &y);
 	if (!(*env)->init->img_grass)
+		return (0);
+	(*env)->init->img_wall = mlx_xpm_file_to_image((*env)->init->mlx,
+			"small_wall.xpm", &x, &y);
+	if (!(*env)->init->img_wall)
 		return (0);
 	return (map_init_two(env));
 }
@@ -24,6 +24,7 @@ int	map_print(char **map, t_env **env, int x, int y)
 {
 	if (!map_init(env) || !map[y + 1])
 		return (0);
+	(*env)->map->door_count = 0;
 	while (map[++y])
 	{
 		x = -1;
@@ -74,7 +75,7 @@ int	map_sizer(char *name, int *y, int *x)
 	line = get_next_line(fd);
 	if (!line)
 		return (0);
-	*x = ft_strlen(line);
+	*x = ft_strlen(line) - 1;
 	if (*x <= 1)
 		return (free(line), 0);
 	while (line)

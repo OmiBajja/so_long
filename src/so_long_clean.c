@@ -42,11 +42,11 @@ void	printer_ink(char **map, t_env **env, int x, int y)
 {
 	if (map[y][x] == '0')
 		mlx_put_image_to_window((*env)->init->mlx,
-			(*env)->init->mlx_window, (*env)->init->img_wall,
+			(*env)->init->mlx_window, (*env)->init->img_grass,
 			x * 32, y * 32);
 	else if (map[y][x] == '1')
 		mlx_put_image_to_window((*env)->init->mlx,
-			(*env)->init->mlx_window, (*env)->init->img_grass,
+			(*env)->init->mlx_window, (*env)->init->img_wall,
 			x * 32, y * 32);
 	else if (map[y][x] == 'P')
 		img_set_character(env, x, y);
