@@ -10,6 +10,8 @@
 typedef struct s_map
 {
 	char		**map;
+	int			width;
+	int			height;
 	int			player_x;
 	int			player_y;
 	void		*tile;
@@ -65,5 +67,12 @@ int				close_window(void *mlx);
 void			clean_image(t_env *env);
 int				map_init_two(t_env	**env);
 void			printer_ink(char **map, t_env **env, int x, int y);
+char			**map_creator(int x, int y, t_env **env);
+void			right_win (t_env *env, int y, int x);
+void			left_win (t_env *env, int y, int x);
+void			up_win (t_env *env, int y, int x);
+void			down_win (t_env *env, int y, int x);
+
+
 
 #endif

@@ -11,7 +11,7 @@ MLX_DIR		= mlx_linux/
 
 # Source files (without src/ prefix)
 VPATH		= $(SRC_DIR)
-SRC_FILES	= so_long.c so_long_movement.c so_long_image.c so_long_check.c so_long_parser.c so_long_flood.c so_long_clean.c
+SRC_FILES	= so_long.c so_long_movement.c so_long_image.c so_long_check.c so_long_parser.c so_long_flood.c so_long_clean.c so_long_winner.c
 OBJ_FILES	= $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.o)))
 
 # Header files

@@ -6,14 +6,7 @@ void	move_up(int key, t_env *env, int y, int x)
 
 	map2 = env->map->map;
 	if (key == 119 && map2[y - 1][x] == 'E' && env->map->cheese_count == 0)
-	{
-		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_player, x * 32, (y - 1) * 32);
-		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
-		ft_printf("YOU WON!!\n");
-		close_window(env);
-	}
+		up_win(env, y, x);
 	if (key == 119 && (map2[y - 1][x] == '0' || map2[y - 1][x] == 'C'))
 	{
 		if (map2[y - 1][x] == 'C')
@@ -23,7 +16,7 @@ void	move_up(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, x * 32, (y - 1) * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		env->map->player_y -= 1;
 		ft_printf("Moves Count: %d\r", env->player->moves++);
 	}
@@ -35,14 +28,7 @@ void	move_down(int key, t_env *env, int y, int x)
 
 	map2 = env->map->map;
 	if (key == 115 && map2[y + 1][x] == 'E' && env->map->cheese_count == 0)
-	{
-		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_player, x * 32, (y + 1) * 32);
-		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
-		ft_printf("YOU WON!!\n");
-		close_window(env);
-	}
+		down_win(env, y, x);
 	if (key == 115 && (map2[y + 1][x] == '0' || map2[y + 1][x] == 'C'))
 	{
 		if (map2[y + 1][x] == 'C')
@@ -52,7 +38,7 @@ void	move_down(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, x * 32, (y + 1) * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		env->map->player_y += 1;
 		ft_printf("Moves Count: %d\r", env->player->moves++);
 	}
@@ -64,14 +50,7 @@ void	move_right(int key, t_env *env, int y, int x)
 
 	map2 = env->map->map;
 	if (key == 100 && map2[y][x + 1] == 'E' && env->map->cheese_count == 0)
-	{
-		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_player, (x + 1) * 32, y * 32);
-		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
-		ft_printf("\nYOU WON!!\n");
-		close_window(env);
-	}
+		right_win(env, y, x);
 	if (key == 100 && (map2[y][x + 1] == '0' || map2[y][x + 1] == 'C'))
 	{
 		if (map2[y][x + 1] == 'C')
@@ -81,7 +60,7 @@ void	move_right(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, (x + 1) * 32, y * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		env->map->player_x += 1;
 		ft_printf("Moves Count: %d\r", env->player->moves++);
 	}
@@ -93,14 +72,7 @@ void	move_left(int key, t_env *env, int y, int x)
 
 	map2 = env->map->map;
 	if (key == 97 && map2[y][x - 1] == 'E' && env->map->cheese_count == 0)
-	{
-		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_player, (x - 1) * 32, y * 32);
-		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
-		ft_printf("\nYOU WON!!\n");
-		close_window(env);
-	}
+		left_win(env, y, x);
 	if (key == 97 && (map2[y][x - 1] == '0' || map2[y][x - 1] == 'C'))
 	{
 		if (map2[y][x - 1] == 'C')
@@ -110,7 +82,7 @@ void	move_left(int key, t_env *env, int y, int x)
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
 			env->init->img_player, (x - 1) * 32, y * 32);
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
-			env->init->img_wall, x * 32, y * 32);
+			env->init->img_grass, x * 32, y * 32);
 		env->map->player_x -= 1;
 		ft_printf("Moves Count: %d\r", env->player->moves++);
 	}

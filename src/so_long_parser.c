@@ -10,11 +10,11 @@ int	map_init(t_env **env)
 	if (!env || !*env)
 		return (0);
 	(*env)->init->img_wall = mlx_xpm_file_to_image((*env)->init->mlx,
-			"small.xpm", &x, &y);
+			"small_wall.xpm", &x, &y);
 	if (!(*env)->init->img_wall)
 		return (0);
 	(*env)->init->img_grass = mlx_xpm_file_to_image((*env)->init->mlx,
-			"small_wall.xpm", &x, &y);
+			"small_grass.xpm", &x, &y);
 	if (!(*env)->init->img_grass)
 		return (0);
 	return (map_init_two(env));
@@ -88,26 +88,22 @@ int	map_sizer(char *name, int *y, int *x)
 
 int	map_parser(t_env **env, char *name)
 {
-	int	i;
 	int	y;
 	int	x;
 
-	i = -1;
 	if (!map_sizer(name, &y, &x))
 		return (0);
-	(*env)->map->map = ft_calloc(y + 1, sizeof(char *));
+	(*env)->map->map = map_creator(x, y, env);
 	if (!(*env)->map->map)
 		return (0);
-	while (++i < y)
-	{
-		(*env)->map->map[i] = ft_calloc(x + 1, sizeof(char));
-		if (!(*env)->map->map[i])
-			return (0);
-	}
 	map_filler(name, &(*env)->map->map, 0, 0);
 	if (!wall_checker((*env)->map->map, 0, 0, 0))
 		return (0);
 	(*env)->map->cheese_count = 0;
+	(*env)->init->mlx_window = mlx_new_window((*env)->init->mlx, (x - 1) * 32, y
+			* 32, "Dinosaurs");
+	if (!(*env)->init->mlx_window)
+		return (1);
 	if (!map_print((*env)->map->map, env, -1, -1)
 		|| !map_floodable((*env)->map->map, y, env))
 		return (0);

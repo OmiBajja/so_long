@@ -1,5 +1,22 @@
 #include "so_long.h"
 
+char	**map_creator(int x, int y, t_env **env)
+{
+	int	i;
+
+	i = -1;
+	(*env)->map->map = ft_calloc(y + 1, sizeof(char *));
+	if (!(*env)->map->map)
+		return (0);
+	while (++i < y)
+	{
+		(*env)->map->map[i] = ft_calloc(x + 1, sizeof(char));
+		if (!(*env)->map->map[i])
+			return (0);
+	}
+	return ((*env)->map->map);
+}
+
 void	clean_image(t_env *env)
 {
 	if (env->init->img_grass && env->init->img_wall)
@@ -42,11 +59,11 @@ void	printer_ink(char **map, t_env **env, int x, int y)
 {
 	if (map[y][x] == '0')
 		mlx_put_image_to_window((*env)->init->mlx,
-			(*env)->init->mlx_window, (*env)->init->img_wall,
+			(*env)->init->mlx_window, (*env)->init->img_grass,
 			x * 32, y * 32);
 	else if (map[y][x] == '1')
 		mlx_put_image_to_window((*env)->init->mlx,
-			(*env)->init->mlx_window, (*env)->init->img_grass,
+			(*env)->init->mlx_window, (*env)->init->img_wall,
 			x * 32, y * 32);
 	else if (map[y][x] == 'P')
 		img_set_character(env, x, y);

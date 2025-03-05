@@ -56,10 +56,6 @@ int	init_mlx(t_env **env)
 	(*env)->init->mlx = mlx_init();
 	if (!(*env)->init->mlx)
 		return (0);
-	(*env)->init->mlx_window = mlx_new_window((*env)->init->mlx, 800, 600,
-			"Dinosaurs");
-	if (!(*env)->init->mlx_window)
-		return (0);
 	(*env)->map = ft_calloc(1, sizeof(t_map));
 	if (!(*env)->map)
 		return (0);
@@ -70,25 +66,27 @@ int	init_mlx(t_env **env)
 	return (1);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_env	*env;
 
-	if (!name_checker("map.ber"))
+	if (argc != 2)
+		return (1);
+	if (!name_checker(argv[1]))
 		return (1);
 	if (!init_mlx(&env))
 	{
 		clean_free(env);
 		return (1);
 	}
-	mlx_hook(env->init->mlx_window, 17, 0, close_window, env);
-	mlx_key_hook(env->init->mlx_window, input_master, env);
-	if (!map_parser(&env, "map.ber"))
+	if (!map_parser(&env, argv[1]))
 	{
-		ft_putstr_fd("Error Parsing\n", 2);
+		ft_putstr_fd("Error\n", 2);
 		clean_free(env);
 		return (1);
 	}
+	mlx_hook(env->init->mlx_window, 17, 0, close_window, env);
+	mlx_hook(env->init->mlx_window, 2, 1L << 0, input_master, env);
 	mlx_loop(env->init->mlx);
 	clean_free(env);
 	return (0);
