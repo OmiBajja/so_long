@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_movement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obajja <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: obajja <obajja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:39:18 by obajja            #+#    #+#             */
-/*   Updated: 2025/03/06 14:39:21 by obajja           ###   ########.fr       */
+/*   Updated: 2025/03/06 16:00:35 by obajja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	move_up(int key, t_env *env, int y, int x)
 	char	**map2;
 
 	map2 = env->map->map;
+	if (key == 119 && map2[y - 1][x] == 'T')
+		up_lose(env, y, x);
 	if (key == 119 && map2[y - 1][x] == 'E' && env->map->cheese_count == 0)
 		up_win(env, y, x);
 	if (key == 119 && (map2[y - 1][x] == '0' || map2[y - 1][x] == 'C'))
@@ -41,6 +43,8 @@ void	move_down(int key, t_env *env, int y, int x)
 	char	**map2;
 
 	map2 = env->map->map;
+	if (key == 115 && map2[y + 1][x] == 'T')
+		down_lose(env, y, x);
 	if (key == 115 && map2[y + 1][x] == 'E' && env->map->cheese_count == 0)
 		down_win(env, y, x);
 	if (key == 115 && (map2[y + 1][x] == '0' || map2[y + 1][x] == 'C'))
@@ -65,6 +69,8 @@ void	move_right(int key, t_env *env, int y, int x)
 	char	**map2;
 
 	map2 = env->map->map;
+	if (key == 100 && map2[y][x + 1] == 'T')
+		right_lose(env, y, x);
 	if (key == 100 && map2[y][x + 1] == 'E' && env->map->cheese_count == 0)
 		right_win(env, y, x);
 	if (key == 100 && (map2[y][x + 1] == '0' || map2[y][x + 1] == 'C'))
@@ -89,6 +95,8 @@ void	move_left(int key, t_env *env, int y, int x)
 	char	**map2;
 
 	map2 = env->map->map;
+	if (key == 97 && map2[y][x - 1] == 'T')
+		left_lose(env, y, x);
 	if (key == 97 && map2[y][x - 1] == 'E' && env->map->cheese_count == 0)
 		left_win(env, y, x);
 	if (key == 97 && (map2[y][x - 1] == '0' || map2[y][x - 1] == 'C'))

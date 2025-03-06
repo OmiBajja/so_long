@@ -6,7 +6,7 @@
 /*   By: obajja <obajja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:39:26 by obajja            #+#    #+#             */
-/*   Updated: 2025/03/06 16:23:30 by obajja           ###   ########.fr       */
+/*   Updated: 2025/03/06 16:17:05 by obajja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ int	map_init(t_env **env)
 	(*env)->init->img_grass = mlx_xpm_file_to_image((*env)->init->mlx,
 			"assets/small_grass.xpm", &x, &y);
 	if (!(*env)->init->img_grass)
+		return (0);
+	(*env)->init->img_trap = mlx_xpm_file_to_image((*env)->init->mlx,
+			"assets/small_trap.xpm", &x, &y);
+	if (!(*env)->init->img_trap)
+		return (0);
+	(*env)->init->img_trap_ouch = mlx_xpm_file_to_image((*env)->init->mlx,
+			"assets/small_trap_mouse.xpm", &x, &y);
+	if (!(*env)->init->img_trap_ouch)
 		return (0);
 	return (map_init_two(env));
 }

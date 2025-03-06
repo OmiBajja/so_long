@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_image.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obajja <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: obajja <obajja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:39:09 by obajja            #+#    #+#             */
-/*   Updated: 2025/03/06 14:39:11 by obajja           ###   ########.fr       */
+/*   Updated: 2025/03/06 15:18:07 by obajja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	img_set_traps(t_env **env, int x, int y)
+{
+	mlx_put_image_to_window((*env)->init->mlx, (*env)->init->mlx_window,
+		(*env)->init->img_trap, x * 32, y * 32);
+}
 
 void	img_set_character(t_env **env, int x, int y)
 {

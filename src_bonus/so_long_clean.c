@@ -6,7 +6,7 @@
 /*   By: obajja <obajja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:38:53 by obajja            #+#    #+#             */
-/*   Updated: 2025/03/06 16:23:58 by obajja           ###   ########.fr       */
+/*   Updated: 2025/03/06 16:18:51 by obajja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,18 @@ void	clean_image(t_env *env)
 		mlx_destroy_image(env->init->mlx, env->init->img_exit);
 	if (env->init->img_exit_open)
 		mlx_destroy_image(env->init->mlx, env->init->img_exit_open);
+	if (env->init->img_trap)
+		mlx_destroy_image(env->init->mlx, env->init->img_trap);
 	if (env->init->img_player_left)
 		mlx_destroy_image(env->init->mlx, env->init->img_player_left);
 	if (env->init->img_player_right)
 		mlx_destroy_image(env->init->mlx, env->init->img_player_right);
-	if (env->init->img_player_up)
-		mlx_destroy_image(env->init->mlx, env->init->img_player_up);
 	if (env->init->img_player_down)
 		mlx_destroy_image(env->init->mlx, env->init->img_player_down);
+	if (env->init->img_player_up)
+		mlx_destroy_image(env->init->mlx, env->init->img_player_up);
+	if (env->init->img_trap_ouch)
+		mlx_destroy_image(env->init->mlx, env->init->img_trap_ouch);
 }
 
 int	map_init_three(t_env **env)
@@ -111,6 +115,8 @@ void	printer_ink(char **map, t_env **env, int x, int y)
 		img_set_character(env, x, y);
 	else if (map[y][x] == 'C')
 		img_set_collectible(env, x, y);
+	else if (map[y][x] == 'T')
+		img_set_traps(env, x, y);
 	else if (map[y][x] == 'E')
 	{
 		(*env)->map->door_x = x;

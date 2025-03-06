@@ -6,7 +6,7 @@
 /*   By: obajja <obajja@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:39:02 by obajja            #+#    #+#             */
-/*   Updated: 2025/03/06 14:40:14 by obajja           ###   ########.fr       */
+/*   Updated: 2025/03/06 16:21:51 by obajja           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	flood_fill(char **map, int y, int x, t_env **env)
 {
-	if (map[y][x] == '1' || map[y][x] == 'X')
+	if (map[y][x] == '1' || map[y][x] == 'X' || map[y][x] == 'T')
 		return ;
 	if (map[y][x] == 'C')
 		(*env)->map->cheese_reach--;

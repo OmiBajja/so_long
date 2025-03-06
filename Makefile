@@ -1,60 +1,70 @@
 NAME		= so_long
+BONUS_NAME	= so_long_bonus
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -f
 
-# Directories
 SRC_DIR		= src/
+SRC_BONUS_DIR	= src_bonus/
 OBJ_DIR		= obj/
+OBJ_BONUS_DIR	= obj_bonus/
 INC_DIR		= include/
 MLX_DIR		= mlx_linux/
 
-# Source files (without src/ prefix)
 VPATH		= $(SRC_DIR)
 SRC_FILES	= so_long.c so_long_movement.c so_long_image.c so_long_check.c so_long_parser.c so_long_flood.c so_long_clean.c so_long_winner.c
 OBJ_FILES	= $(addprefix $(OBJ_DIR), $(notdir $(SRC_FILES:.c=.o)))
 
-# Header files
+VPATH_BONUS	= $(SRC_BONUS_DIR)
+SRC_BONUS_FILES	= so_long.c so_long_movement.c so_long_image.c so_long_check.c so_long_parser.c so_long_flood.c so_long_clean.c so_long_winner.c so_long_loser.c
+OBJ_BONUS_FILES	= $(addprefix $(OBJ_BONUS_DIR), $(notdir $(SRC_BONUS_FILES:.c=.o)))
+
 INCLUDES	= -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
 
-# MLX flags
 MLX_FLAGS	= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
-# Libft
 LIBFT_DIR	= include/libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 LIBFT_FLAGS	= -L$(LIBFT_DIR) -lft
 
-# Default target
 all: $(OBJ_DIR) $(NAME)
 
-# Create object directory
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
-# Rule to compile libft
+$(OBJ_BONUS_DIR):
+	@mkdir -p $(OBJ_BONUS_DIR)
+
 $(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory > /dev/null
 
-# Compile source files
-$(OBJ_DIR)%.o: %.c
+$(LIBFT_BONUS):
+	@$(MAKE) -C $(LIBFT_DIR) bonus --no-print-directory > /dev/null
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-# Link object files with MLX and Libft
+$(OBJ_BONUS_DIR)%.o: $(SRC_BONUS_DIR)%.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
 $(NAME): $(LIBFT) $(OBJ_FILES)
 	$(CC) $(OBJ_FILES) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(NAME)
 
-# Clean object files
+$(BONUS_NAME): $(LIBFT) $(OBJ_BONUS_FILES)
+	$(CC) $(OBJ_BONUS_FILES) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $(BONUS_NAME)
+
+bonus: $(OBJ_BONUS_DIR) $(BONUS_NAME)
+
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
-	$(RM) -r $(OBJ_DIR)
+	$(RM) -r $(OBJ_DIR) $(OBJ_BONUS_DIR)
 
-# Clean object files and executable
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(BONUS_NAME)
 
-# Clean and rebuild
 re: fclean all
 
-.PHONY: all clean fclean re
+re_bonus: fclean bonus
+
+.PHONY: all clean fclean re bonus re_bonus
