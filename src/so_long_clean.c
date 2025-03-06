@@ -25,11 +25,12 @@ void	clean_image(t_env *env)
 		mlx_destroy_image(env->init->mlx, env->init->img_wall);
 	}
 	if (env->init->img_player && env->init->img_collectible
-		&& env->init->img_exit)
+		&& env->init->img_exit && env->init->img_exit_open)
 	{
 		mlx_destroy_image(env->init->mlx, env->init->img_player);
 		mlx_destroy_image(env->init->mlx, env->init->img_collectible);
 		mlx_destroy_image(env->init->mlx, env->init->img_exit);
+		mlx_destroy_image(env->init->mlx, env->init->img_exit_open);
 	}
 }
 
@@ -49,7 +50,11 @@ int	map_init_two(t_env	**env)
 	if (!(*env)->init->img_collectible)
 		return (0);
 	(*env)->init->img_exit = mlx_xpm_file_to_image((*env)->init->mlx,
-			"small_exit.xpm", &x, &y);
+			"door_close.xpm", &x, &y);
+	if (!(*env)->init->img_exit)
+		return (0);
+	(*env)->init->img_exit_open = mlx_xpm_file_to_image((*env)->init->mlx,
+			"door_open.xpm", &x, &y);
 	if (!(*env)->init->img_exit)
 		return (0);
 	return (1);
@@ -70,5 +75,9 @@ void	printer_ink(char **map, t_env **env, int x, int y)
 	else if (map[y][x] == 'C')
 		img_set_collectible(env, x, y);
 	else if (map[y][x] == 'E')
-		img_set_exit(env, x, y);
+	{
+		(*env)->map->door_x = x;
+		(*env)->map->door_y = y;
+		img_set_exit(env);
+	}
 }

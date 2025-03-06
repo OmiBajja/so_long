@@ -11,6 +11,8 @@ void	move_up(int key, t_env *env, int y, int x)
 	{
 		if (map2[y - 1][x] == 'C')
 			env->map->cheese_count--;
+		if (env->map->cheese_count == 0)
+			img_set_exit_open(&env);
 		env->map->map[y - 1][x] = 'P';
 		env->map->map[y][x] = '0';
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
@@ -33,6 +35,8 @@ void	move_down(int key, t_env *env, int y, int x)
 	{
 		if (map2[y + 1][x] == 'C')
 			env->map->cheese_count--;
+		if (env->map->cheese_count == 0)
+			img_set_exit_open(&env);
 		env->map->map[y + 1][x] = 'P';
 		env->map->map[y][x] = '0';
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
@@ -55,6 +59,8 @@ void	move_right(int key, t_env *env, int y, int x)
 	{
 		if (map2[y][x + 1] == 'C')
 			env->map->cheese_count--;
+		if (env->map->cheese_count == 0)
+			img_set_exit_open(&env);
 		env->map->map[y][x + 1] = 'P';
 		env->map->map[y][x] = '0';
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,
@@ -77,6 +83,8 @@ void	move_left(int key, t_env *env, int y, int x)
 	{
 		if (map2[y][x - 1] == 'C')
 			env->map->cheese_count--;
+		if (env->map->cheese_count == 0)
+			img_set_exit_open(&env);
 		env->map->map[y][x - 1] = 'P';
 		env->map->map[y][x] = '0';
 		mlx_put_image_to_window(env->init->mlx, env->init->mlx_window,

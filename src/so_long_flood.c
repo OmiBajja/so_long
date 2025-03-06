@@ -19,7 +19,6 @@ void	flood_fill(char **map, int y, int x,
 int	map_floodable(char **map, int lines, t_env **env)
 {
 	char	**map2;
-
 	(*env)->map->cheese_reach = (*env)->map->cheese_count;
 	(*env)->map->door_reach = 0;
 	map2 = ft_strsdup(map, lines);

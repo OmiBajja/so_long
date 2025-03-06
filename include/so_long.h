@@ -17,6 +17,8 @@ typedef struct s_map
 	void		*tile;
 	int			cheese_count;
 	int			door_count;
+	int			door_x;
+	int			door_y;
 	int			cheese_reach;
 	int			door_reach;
 
@@ -38,6 +40,7 @@ typedef struct s_init
 	void		*img_grass;
 	void		*img_player;
 	void		*img_exit;
+	void		*img_exit_open;
 	void		*img_collectible;
 
 }				t_init;
@@ -60,7 +63,7 @@ int				wall_checker(char **map, int x, int y, int turn);
 void			moving_player(int key, t_env *env, int y, int x);
 void			img_set_character(t_env **env, int x, int y);
 void			img_set_collectible(t_env **env, int x, int y);
-void			img_set_exit(t_env **env, int x, int y);
+void			img_set_exit(t_env **env);
 void			flood_fill(char **map, int y, int x, t_env **env);
 int				map_floodable(char **map, int lines, t_env **env);
 int				close_window(void *mlx);
@@ -72,7 +75,6 @@ void			right_win (t_env *env, int y, int x);
 void			left_win (t_env *env, int y, int x);
 void			up_win (t_env *env, int y, int x);
 void			down_win (t_env *env, int y, int x);
-
-
+void			img_set_exit_open(t_env **env);
 
 #endif
